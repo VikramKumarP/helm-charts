@@ -1,0 +1,11 @@
+# Default values for metabase.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+app_name:
+  short_name: pp
+  namespace: metabases
+  tag: latest
+  disc_space: 20Gi #for ex. 50Gi, 1024Mi

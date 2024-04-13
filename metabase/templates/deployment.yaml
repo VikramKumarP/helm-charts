@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Values.app_name.namespace }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: metabase
+  template:
+    metadata:
+      labels:
+        app: metabase
+    spec:
+      containers:
+      - name: metabase
+        image: metabase/metabase:{{ .Values.app_name.tag }}
+        ports:
+        - containerPort: 3000
+        env:
+          - name: MB_DB_TYPE
+            value: "postrgres"
+          - name: MB_DB_DBNAME
+            value: "metabase"
+          - name: MB_DB_PORT
+            value: "3306"
+
+          - name: MB_DB_USER
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Release.Name }}-secret
+                key: username
+
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Release.Name }}-secret
+                key: password
+
+          - name: MB_DB_HOST
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Release.Name }}-secret
+                key: host
+
+        volumeMounts:
+        - name: metabase-data
+          mountPath: /metabase-data
+
+      volumes:
+      - name: metabase-data
+        persistentVolumeClaim:
+          claimName: {{ .Release.Name }}-pvc
