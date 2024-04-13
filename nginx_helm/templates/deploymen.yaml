@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.application.name }}
+  labels:
+    app: atm_application
+    role: dryrun
+  namespace: {{ .Values.application.namespace }}
+spec:
+  replicas: {{ .Values.application.replicaCount }}
+  selector:
+    matchLabels:
+      app: atm_application
+      role: dryrun
+  template:
+    metadata:
+      labels:
+        app: atm_application
+        role: dryrun
+    spec:
+      containers:
+      - image: 089965480376.dkr.ecr.af-south-1.amazonaws.com/jenkins_demo:{{ .Values.application.image.tag }}
+        name: nginx
+        containerPort: 80
+        resources: {}

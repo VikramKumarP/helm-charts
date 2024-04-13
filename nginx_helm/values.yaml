@@ -1,0 +1,13 @@
+# Default values for nginx.
+
+application:
+  name: sbsa-bank
+  namespace: default
+  replicaCount: 1
+  image:
+    tag: 3 # Overrides the image tag whose default is the chart appVersion.
+  labels:
+    role: dryrun
+service:
+  type: NodePort
+  port: 80

@@ -1,0 +1,45 @@
+---
+# Source: nginx_helm/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: sbsa-bank-svc
+  labels:
+     app: atm_application
+spec:
+  type: NodePort
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+      name: http
+  selector:
+    app: atm_application
+    role: dryrun
+---
+# Source: nginx_helm/templates/deploymen.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sbsa-bank
+  labels:
+    app: atm_application
+    role: dryrun
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: atm_application
+      role: dryrun
+  template:
+    metadata:
+      labels:
+        app: atm_application
+        role: dryrun
+    spec:
+      containers:
+      - image: 089965480376.dkr.ecr.af-south-1.amazonaws.com/jenkins_demo:3
+        name: nginx
+        containerPort: 80
+        resources: {}

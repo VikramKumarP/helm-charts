@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.application.name }}-svc
+  labels:
+     app: atm_application
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: 80
+      protocol: TCP
+      name: http
+  selector:
+    app: atm_application
+    role: dryrun
