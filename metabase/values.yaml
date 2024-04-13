@@ -5,7 +5,6 @@
 replicaCount: 1
 
 app_name:
-  short_name: pp
-  namespace: metabases
+  namespace: metabase
   tag: latest
   disc_space: 20Gi #for ex. 50Gi, 1024Mi
