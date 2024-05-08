@@ -6,5 +6,5 @@ replicaCount: 1
 
 app_name:
   namespace: metabase
-  tag: latest
+  tag: latest  # may use this. metabase:v0.49.8
   disc_space: 20Gi #for ex. 50Gi, 1024Mi
