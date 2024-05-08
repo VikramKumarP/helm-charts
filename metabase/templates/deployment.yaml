@@ -34,7 +34,6 @@ spec:
           # - name: MB_DB_HOST
           #   value: "my-postgresql.default"
 
-        # env:
           - name: MB_DB_TYPE
             value: "postgres"
           - name: MB_DB_DBNAME
