@@ -19,12 +19,31 @@ spec:
         ports:
         - containerPort: 3000
         env:
+          # - name: MB_DB_TYPE
+          #   value: "postgres"
+          # - name: MB_DB_DBNAME
+          #   value: "metabase"
+          # - name: MB_DB_PORT
+          #   value: "5432"
+          # - name: MB_DB_USER
+          #   value: "postgres"
+          # - name: JAVA_TOOL_OPTIONS
+          #   value: "-Xmx1g"
+          # - name: MB_DB_PASS
+          #   value: "xz1I9fqD2Q"
+          # - name: MB_DB_HOST
+          #   value: "my-postgresql.default"
+
+        # env:
           - name: MB_DB_TYPE
-            value: "postrgres"
+            value: "postgres"
           - name: MB_DB_DBNAME
             value: "metabase"
           - name: MB_DB_PORT
-            value: "3306"
+            value: "5432"
+          - name: JAVA_TOOL_OPTIONS
+            value: "-Xmx1g"
+
 
           - name: MB_DB_USER
             valueFrom:
@@ -32,7 +51,7 @@ spec:
                 name: {{ .Release.Name }}-secret
                 key: username
 
-          - name: DB_PASSWORD
+          - name: MB_DB_PASS
             valueFrom:
               secretKeyRef:
                 name: {{ .Release.Name }}-secret
